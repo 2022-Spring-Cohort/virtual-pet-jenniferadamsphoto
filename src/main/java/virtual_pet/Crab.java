@@ -47,7 +47,12 @@ public class Crab {
     }
 
     public String greeting() {
-        return "My name is: " + name + "\nMy shell color  is: " + shellColor + "\nI am " + age + " years old.";
+        return "My name is: " + name + "\nMy shell color  is: " + shellColor + "\nI am " + age + " years old." +
+                "\n       __\n" +
+                "      (__)_\n" +
+                "     (____)_\n" +
+                "    (______)\n" +
+                "...//(  00 )\\..... ";
     }
 
     public String hungerCheck() {
@@ -118,7 +123,6 @@ public class Crab {
         humid ++;
         humid ++;
     }
-
     public void tick() {
         this.hunger--;
         this.thirst--;

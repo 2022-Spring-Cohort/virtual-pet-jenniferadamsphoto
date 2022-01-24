@@ -16,7 +16,7 @@ public class VirtualPetApplication {
 
         System.out.println("Welcome to Hermit Crabs Make Terrible Pets! Meet your new crab:");
         System.out.println(kirby.greeting());
-        while (playGame = true) {
+        while (playGame == true) {
             System.out.println(directions());
             int userSelect = userInput.nextInt();
             if (userSelect == 1) {
