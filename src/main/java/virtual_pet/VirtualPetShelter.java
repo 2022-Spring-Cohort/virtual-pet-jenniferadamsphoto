@@ -1,5 +1,7 @@
 package virtual_pet;
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -93,8 +95,12 @@ public class VirtualPetShelter {
                 System.out.println(crab.getName());
     }
 
-    public void adoptCrabByName(String crabName) {
-        crabsInShelter.remove(findCrabByName(crabName));
+    public Crab adoptCrabByName(String crabName) {
+        Crab tempCrab = findCrabByName(crabName);
+        if (tempCrab != null) {
+            crabsInShelter.remove(tempCrab);
+        }
+        return tempCrab;
     }
 
     public void feedAllOrganicCrabs() {
@@ -234,6 +240,16 @@ public class VirtualPetShelter {
             }
         }
     }
+    public void checkStatusAllCrabs() {
+        for (Crab crab : crabsInShelter) {
+            if (crab instanceof OrganicCrab) {
+                ((OrganicCrab) crab).statusMessage();
+            } else if (crab instanceof RoboticCrab) {
+                ((RoboticCrab) crab).statusMessageRoboticCrabs();
+            }
+        }
+    }
+
 
     public void checkStatusAllRoboticCrabs() {
         for (Crab crab : crabsInShelter) {
