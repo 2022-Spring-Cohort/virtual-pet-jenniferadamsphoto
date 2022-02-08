@@ -10,91 +10,172 @@ public class VirtualPetApplication {
 
     public static void main(String[] args) {
         VirtualPetShelter crabsInShelter = new VirtualPetShelter();
-        HermitCrab hermitCrab1 = new HermitCrab("Kirby", "pink", 7);
-        HermitCrab hermitCrab2 = new HermitCrab("Goldie", "gold", 8);
-        HermitCrab hermitCrab3 = new HermitCrab("Oscar", "green", 3);
-        HermitCrab hermitCrab4 = new HermitCrab("KrustyKrab", "rust", 5);
-        HermitCrab hermitCrab5 = new HermitCrab("CrabbiePattie", "purple", 1);
+        HermitCrab hermitCrab1 = new HermitCrab("Kirby", 5, "pink","Hermit Crab");
+        HermitCrab hermitCrab2 = new HermitCrab("Goldie", 7, "gold", "Hermit Crab");
         crabsInShelter.addCrab(hermitCrab1);
         crabsInShelter.addCrab(hermitCrab2);
-        crabsInShelter.addCrab(hermitCrab3);
-        crabsInShelter.addCrab(hermitCrab4);
-        crabsInShelter.addCrab(hermitCrab5);
+        HorseshoeCrab horseshoeCrab1 = new HorseshoeCrab("Krusty", 5, "tan", "Horseshoe Crab");
+        HorseshoeCrab horseshoeCrab2 = new HorseshoeCrab("CrabbyPatty", 3, "brown", "Horseshoe Crab");
+        crabsInShelter.addCrab(horseshoeCrab1);
+        crabsInShelter.addCrab(horseshoeCrab2);
+        RoboticHermitCrab roboticHermitCrab1 = new RoboticHermitCrab("Bender", 1, "pewter", "Robotic Hermit Crab");
+        RoboticHermitCrab roboticHermitCrab2 = new RoboticHermitCrab("Clamps", 8, "silver", "Robotic Hermit Crab");
+        crabsInShelter.addCrab(roboticHermitCrab1);
+        crabsInShelter.addCrab(roboticHermitCrab2);
+        RoboticHorseshoeCrab roboticHorseshoeCrab1 = new RoboticHorseshoeCrab("Bolts", 2, "platinum", "Robotic Horseshoe Crab");
+        RoboticHorseshoeCrab roboticHorseshoeCrab2 = new RoboticHorseshoeCrab("Nuts", 4, "bronze", "Robotic Horseshoe Crab");
+        crabsInShelter.addCrab(roboticHorseshoeCrab1);
+        crabsInShelter.addCrab(roboticHorseshoeCrab2);
 
         Scanner userInput = new Scanner(System.in);
 
-        System.out.println("Welcome to Virtual Crab Shelter! We have currently have " + crabsInShelter.getNumberOfCrabs() + " crabs to adopt and play with.");
+        System.out.println("Welcome to Virtual Crab Shelter! We have currently have " + crabsInShelter.getNumberOfCrabs() + " crabs to adopt and play with." +
+                "\nBe careful, if all the crabs needs go down to zero, you will have to leave." +
+                "\n                          _______   " +
+                "\n                        [         ]    " +
+                "\n                      [   @     @   ]     " +
+                "\n                     |               |     " +
+                "\n         __          |  ~~~~~~~~~~~  |      " +
+                "\n        (__)          [    <   >    ]      " +
+                "\n       (____)         <[    < >    ]>   " +
+                "\n      (______)         <[__  ~  __]>      " +
+                "\n.....[[(  00 )]]].....      <|>       " +
+                "\n                             |     " +
+                "\n                             |     ");
         System.out.println(directions());
 
-
         int userSelect = 0;
-        while (hermitCrab1.alive) {
+        while (crabsInShelter.allCrabsAlive()) {
             userSelect = userInput.nextInt();
             userInput.nextLine();
             if (userSelect == 1) {
-                crabsInShelter.feedAll();
+                crabsInShelter.feedAllOrganicCrabs();
                 System.out.println("Thank you for feeding us!");
-                crabsInShelter.checkStatusAll();
+                crabsInShelter.checkStatusAllOrganicCrabs();
+                crabsInShelter.tickOrganicCrabs();
             } else if (userSelect == 2) {
-                crabsInShelter.giveWaterAll();
+                crabsInShelter.giveWaterAllOrganicCrabs();
                 System.out.println("Thank you for giving us water!");
-                crabsInShelter.checkStatusAll();
+                crabsInShelter.checkStatusAllOrganicCrabs();
+                crabsInShelter.tickOrganicCrabs();
             } else if (userSelect == 3) {
-                crabsInShelter.sprayCageAll();
-                System.out.println("Thank you for spraying our cages!");
-                crabsInShelter.checkStatusAll();
+                crabsInShelter.giveSaltWaterAllOrganicCrabs();
+                System.out.println("Thank you for the salt water!");
+                crabsInShelter.checkStatusAllOrganicCrabs();
+                crabsInShelter.tickOrganicCrabs();
             } else if (userSelect == 4) {
-                crabsInShelter.playAll();
-                System.out.println("Please put me down, I don't like being picked up.");
-                crabsInShelter.checkStatusAll();
+                crabsInShelter.cleanCagesOrganicCrabs();
+                System.out.println("Thank you for cleaning our cages!");
+                crabsInShelter.checkStatusAllOrganicCrabs();
+                crabsInShelter.tickOrganicCrabs();
             } else if (userSelect == 5) {
-                System.out.println("Here are the crabs currently in the shelter:");
-                crabsInShelter.getListOfCrabs();
-                System.out.println("Please type the name of the crab you want to interact with:");
+                crabsInShelter.chargeAllRoboticCrabs();
+                System.out.println("Thank you for charging us!");
+                crabsInShelter.checkStatusAllRoboticCrabs();
+                crabsInShelter.tickRoboticCrabs();
+            } else if (userSelect == 6) {
+                crabsInShelter.giveOilAllRoboticCrabs();
+                System.out.println("Thank you for giving us oil!");
+                crabsInShelter.checkStatusAllRoboticCrabs();
+                crabsInShelter.tickRoboticCrabs();
+            } else if (userSelect == 7){
+                crabsInShelter.maintenanceAllRoboticCrabs();
+                System.out.println("Thank you for maintenance!");
+                crabsInShelter.checkStatusAllRoboticCrabs();
+                crabsInShelter.tickRoboticCrabs();
+            } else if (userSelect == 8) {
+                crabsInShelter.takeSwimmingHorseshoeCrabs();
+                System.out.println("Thank you for taking us swimming!");
+                crabsInShelter.checkStatusAllHorseshoeCrabs();
+                crabsInShelter.tickAllCrabs();
+            } else if (userSelect == 9) {
+                System.out.println("What type of crab with you like to interact with?" +
+                        "\nType 1 for organic crabs" +
+                        "\nType 2 for robotic crabs");
                 Scanner scanner = new Scanner(System.in);
-                String crabSelect = scanner.nextLine();
-                crabsInShelter.greetingCrabByName(crabSelect);
-                System.out.println("What would you like to do with your crab?" +
-                        "\nType A to feed it" +
-                        "\nType B to give it water" +
-                        "\nType C to spray it's cage with water" +
-                        "\nType D to play with it");
-                String playSelect = scanner.nextLine();
-                    if (playSelect.equalsIgnoreCase("A")) {
-                        crabsInShelter.feedCrabByName(crabSelect);
-                        crabsInShelter.checkStatusCrabByName(crabSelect);
-                        System.out.println("Thank you for feeding me.");
+                int typeSelect = userInput.nextInt();
+                if (typeSelect == 1) {
+                    System.out.println("Here are the organic crabs currently in the shelter:");
+                    crabsInShelter.getListOfOrganicCrabs();
+                    System.out.println("Please type the name of the crab you want to interact with:");
+                    String crabSelect = scanner.nextLine();
+                    crabsInShelter.greetingCrabByName(crabSelect);
+                    System.out.println("What would you like to do with your crab?" +
+                            "\nType 1 to feed it" +
+                            "\nType 2 to give it water" +
+                            "\nType 3 to give it salt water" +
+                            "\nType 4 to take it for a swim");
+                    int playSelect = scanner.nextInt();
+                    switch (playSelect) {
+                        case 1:
+                            crabsInShelter.feedCrabByName(crabSelect);
+                            crabsInShelter.checkStatusCrabByName(crabSelect);
+                            System.out.println("Thank you for feeding me.");
+                            break;
+                        case 2:
+                            crabsInShelter.giveWaterCrabByName(crabSelect);
+                            crabsInShelter.checkStatusCrabByName(crabSelect);
+                            System.out.println("Thank you for giving me water.");
+                            break;
+                        case 3:
+                            crabsInShelter.sprayCageCrabByName(crabSelect);
+                            crabsInShelter.checkStatusCrabByName(crabSelect);
+                            System.out.println("Thank you for spraying my cage.");
+                            break;
+                        case 4:
+                            crabsInShelter.takeSwimmingCrabByName(crabSelect);
+                            crabsInShelter.checkStatusCrabByName(crabSelect);
+                            System.out.println("Thank you for taking me for a swim!");
+                            break;
+                        default: System.out.println("You typed something wrong, please try again");
                     }
-                    else if (playSelect.equalsIgnoreCase("B")) {
-                        crabsInShelter.giveWaterCrabByName(crabSelect);
-                        crabsInShelter.checkStatusCrabByName(crabSelect);
-                        System.out.println("Thank you for giving me water.");
+                } else if (typeSelect == 2) {
+                    System.out.println("Here are the robotic crabs currently in the shelter:");
+                    crabsInShelter.getListOfRoboticCrabs();
+                    System.out.println("Please type the name of the crab you want to interact with:");
+                    String crabRoboticSelect = scanner.nextLine();
+                    crabsInShelter.greetingCrabByName(crabRoboticSelect);
+                    System.out.println("What would you like to do with your crab?" +
+                            "\nType 1 to charge it" +
+                            "\nType 2 to give it oil" +
+                            "\nType 3 to perform maintenance" +
+                            "\nType 4 to take it for a swim");
+                    int playSelect = userInput.nextInt();
+                    switch (playSelect){
+                        case 1:
+                            crabsInShelter.chargeCrabByName(crabRoboticSelect);
+                            crabsInShelter.checkStatusCrabByName(crabRoboticSelect);
+                            System.out.println("Thank you for charging me.");
+                            break;
+                        case 2:
+                            crabsInShelter.giveOilCrabByName(crabRoboticSelect);
+                            crabsInShelter.checkStatusCrabByName(crabRoboticSelect);
+                            System.out.println("Thank you for giving me oil.");
+                            break;
+                        case 3:
+                            crabsInShelter.maintenanceCrabByName(crabRoboticSelect);
+                            crabsInShelter.checkStatusCrabByName(crabRoboticSelect);
+                            System.out.println("Thank you for doing maintenance!");
+                            break;
+                        case 4:
+                            crabsInShelter.takeSwimmingCrabByName(crabRoboticSelect);
+                            crabsInShelter.checkStatusCrabByName(crabRoboticSelect);
+                            System.out.println("Thank you for taking me for a swim!");
+                            break;
+                        default: System.out.println("You typed something wrong, please try again");
                     }
-                    else if (playSelect.equalsIgnoreCase("C")) {
-                        crabsInShelter.sprayCageCrabByName(crabSelect);
-                        crabsInShelter.checkStatusCrabByName(crabSelect);
-                        System.out.println("Thank you for spraying my cage.");
-                    }
-                    else if (playSelect.equalsIgnoreCase("D")) {
-                        crabsInShelter.playCrabByName(crabSelect);
-                        crabsInShelter.checkStatusCrabByName(crabSelect);
-                        System.out.println("I don't like to play.");
-                    }
-                    else {
-                        System.out.println("You typed something wrong, please try again");}
-            }
-                else if (userSelect == 6) {
-                    crabsInShelter.addNewHermitCrab();
                 }
-
-             else if (userSelect == 7) {
+            }
+            else if (userSelect == 10) {
+                crabsInShelter.addNewCrab();
+            } else if (userSelect == 11) {
                 System.out.println("Please choose a crab to adopt");
                 crabsInShelter.getListOfCrabs();
                 String crabName = userInput.nextLine();
                 crabsInShelter.adoptCrabByName(crabName);
                 System.out.println("Thank you for adopting a crab! We love to see them get new homes!");
             }
-             else if (userSelect == 8){
+            else if (userSelect == 12){
                 System.out.println("Are you sure you want to leave the shelter? Type Y or N");
                 Scanner scanner = new Scanner(System.in);
                 String quitAnswer = scanner.nextLine();
@@ -106,21 +187,24 @@ public class VirtualPetApplication {
                 }
 
             }
-            crabsInShelter.tick();
 
         }
 
     }
 
     public static String directions() {
-        return "\nIf you would like to feed all the crabs please type 1" +
-                "\nIf you would like to give all the crabs water, please type 2" +
-                "\nIf you would like to spray all the crabs cage's with water, please type 3" +
-                "\nIf you would like to play with all the crabs, please type 4" +
-                "\nIf you would like to interact with just one crab, please type 5" +
-                "\nIf you would like to add a crab to the shelter, please type 6" +
-                "\nIf you would like to adopt a crab, please type 7" +
-                "\nIf you would like to leave the shelter, please type 8";
+        return "\nType 1 to feed all organic crabs" +
+                "\nType 2 to give all organic crabs water" +
+                "\nType 3 to give all organic crabs salt water" +
+                "\nType 4 to clean organic crab cages" +
+                "\nType 5 to charge all robotic crabs" +
+                "\nType 6 to give all robotic crabs oil" +
+                "\nType 7 to perform maintenance on all robotic crabs" +
+                "\nType 8 if you would like to take the horseshoe crabs swimming" +
+                "\nType 9 if you would like to interact with just one crab" +
+                "\nType 10 if you want to add a crab to the shelter" +
+                "\nType 11 if you would like to adopt a crab" +
+                "\nType 12 to leave the shelter";
     }
 }
 

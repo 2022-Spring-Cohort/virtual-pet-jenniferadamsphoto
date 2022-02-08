@@ -4,26 +4,25 @@ public abstract class Crab {
     protected String name;
     protected int age;
     protected String shellColor;
-    protected static int hunger;
-    protected static int thirst;
-    protected static int humid;
-    protected int happiness;
-    protected boolean alive;
+    protected String type;
 
-    public Crab(String name, int age, String shellColor) {
+
+    public Crab(String name, int age, String shellColor,String type) {
         //Constructors
         this.name = name;
         this.age = age;
         this.shellColor = shellColor;
-        this.alive = true;
+        this.type = type;
+
     }
-//Getters
+
+    //    Getters
     public String getName() {
         return name;
     }
 
-    public boolean isAlive() {
-        return alive;
+    public String getType() {
+        return type;
     }
 
     public int getAge() {
@@ -34,25 +33,9 @@ public abstract class Crab {
         return shellColor;
     }
 
-    public int getHunger() {
-        return hunger;
-    }
+    public abstract boolean alive();
 
-    public int getThirst() {
-        return thirst;
-    }
 
-    public int getHumid() {
-        return humid;
-    }
-    public boolean areNeedsTooHigh(){
-        if (hunger == 0 && thirst == 0 && humid == 0){
-            return true;
-        }
-        return false;
-    }
-
-    public int getHappiness() {
-        return happiness;
-    }
 }
+
+

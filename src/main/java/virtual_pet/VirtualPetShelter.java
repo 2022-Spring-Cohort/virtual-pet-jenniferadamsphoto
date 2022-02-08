@@ -8,6 +8,7 @@ public class VirtualPetShelter {
 
     public VirtualPetShelter() {
         this.crabsInShelter = new ArrayList<>();
+
     }
 
     public void addCrab(Crab myCrab) {
@@ -16,9 +17,9 @@ public class VirtualPetShelter {
 
     public int getNumberOfCrabs() {
         int size = crabsInShelter.size();
-        System.out.println(size);
         return size;
     }
+
     public Crab findCrabByName(String crabName) {
         Crab crab = null;
         for (Crab creature : crabsInShelter) {
@@ -28,7 +29,8 @@ public class VirtualPetShelter {
         }
         return crab;
     }
-    public void addNewHermitCrab(){
+
+    public void addNewCrab() {
         System.out.println("What is your crab's name?");
         Scanner scanner = new Scanner(System.in);
         String newName = scanner.nextLine();
@@ -39,94 +41,260 @@ public class VirtualPetShelter {
         System.out.println("How old is your crab?");
         int newAge = scanner.nextInt();
 
-        Crab newHermitCrab = new HermitCrab(newName, newShellColor, newAge);
-        crabsInShelter.add(newHermitCrab);
+        System.out.println("What type of crab is it?" +
+                "\nType 1 for hermit crab" +
+                "\nType 2 for horseshoe crab" +
+                "\nType 3 for robotic hermit crab" +
+                "\nType 4 for robotic horseshoe crab");
+        int typeSelect = scanner.nextInt();
+        String newType = "";
+        switch (typeSelect) {
+            case 1:
+                newType.equalsIgnoreCase("hermit crab");
+                Crab newHermitCrab = new HermitCrab(newName, newAge, newShellColor, newType);
+                crabsInShelter.add(newHermitCrab);
+                break;
+            case 2:
+                newType.equalsIgnoreCase("horseshoe crab");
+                Crab newHorseshoeCrab = new HorseshoeCrab(newName, newAge, newShellColor, newType);
+                crabsInShelter.add(newHorseshoeCrab);
+                break;
+            case 3:
+                newType.equalsIgnoreCase("robotic hermit crab");
+                Crab newRoboticHermitCrab = new RoboticHermitCrab(newName, newAge, newShellColor, newType);
+                crabsInShelter.add(newRoboticHermitCrab);
+                break;
+            case 4:
+                newType.equalsIgnoreCase("robotic horseshoe crab");
+                Crab newRoboticHorseshoeCrab = new RoboticHorseshoeCrab(newName, newAge, newShellColor, newType);
+                crabsInShelter.add(newRoboticHorseshoeCrab);
+                break;
+            default:
+                System.out.println("You typed something wrong, please try again");
+        }
 
         System.out.println("Thank you for admitting a new crab, we will give it a good home!");
     }
+
     public void getListOfCrabs() {
         for (Crab currentCreature : crabsInShelter)
             System.out.println(currentCreature.getName());
     }
-    public void adoptCrabByName(String crabName){
+
+    public void getListOfOrganicCrabs() {
+        for (Crab crab : crabsInShelter)
+            if (crab instanceof OrganicCrab)
+                System.out.println(crab.getName());
+    }
+
+    public void getListOfRoboticCrabs() {
+        for (Crab crab : crabsInShelter)
+            if (crab instanceof RoboticCrab)
+                System.out.println(crab.getName());
+    }
+
+    public void adoptCrabByName(String crabName) {
         crabsInShelter.remove(findCrabByName(crabName));
     }
-    public void feedAll(){
-        for(Crab crab:crabsInShelter){
-            if(crab instanceof HermitCrab) {
-                ((HermitCrab) crab).feed();
+
+    public void feedAllOrganicCrabs() {
+        for (Crab crab : crabsInShelter) {
+            if (crab instanceof OrganicCrab) {
+                ((OrganicCrab) crab).feed();
             }
-        }
-    }
-    public void feedCrabByName(String crabName) {
-        Crab crab = findCrabByName(crabName);
-        if (crab instanceof HermitCrab) {
-            ((HermitCrab) crab).feed();
-        }
-    }
-        public void giveWaterCrabByName(String crabName){
-            Crab crab = findCrabByName(crabName);
-            if(crab instanceof HermitCrab){
-                ((HermitCrab) crab).giveWater();
-            }
-    }
-    public void checkStatusCrabByName(String crabName){
-        Crab crab = findCrabByName(crabName);
-        if(crab instanceof HermitCrab){
-            ((HermitCrab) crab).statusMessage();
-        }
-    }
-    public void sprayCageCrabByName(String crabName){
-        Crab crab = findCrabByName(crabName);
-        if(crab instanceof HermitCrab){
-            ((HermitCrab) crab).sprayCage();
-        }
-    }
-    public void greetingCrabByName(String crabName){
-        Crab crab = findCrabByName(crabName);
-        if(crab instanceof HermitCrab){
-            ((HermitCrab) crab).greeting();
         }
     }
 
-    public void playCrabByName(String crabName){
+    public void giveWaterAllOrganicCrabs() {
+        for (Crab crab : crabsInShelter) {
+            if (crab instanceof OrganicCrab) {
+                ((OrganicCrab) crab).giveWater();
+            }
+        }
+    }
+
+    public void giveSaltWaterAllOrganicCrabs() {
+        for (Crab crab : crabsInShelter) {
+            if (crab instanceof OrganicCrab) {
+                ((OrganicCrab) crab).giveSaltWater();
+            }
+        }
+    }
+
+    public void cleanCagesOrganicCrabs() {
+        for (Crab crab : crabsInShelter) {
+            if (crab instanceof OrganicCrab) {
+                ((OrganicCrab) crab).cleanCages();
+            }
+        }
+    }
+
+    public void chargeAllRoboticCrabs() {
+        for (Crab crab : crabsInShelter) {
+            if (crab instanceof RoboticCrab) {
+                ((RoboticCrab) crab).chargeRoboticCrabs();
+            }
+        }
+    }
+
+    public void giveOilAllRoboticCrabs() {
+        for (Crab crab : crabsInShelter) {
+            if (crab instanceof RoboticCrab) {
+                ((RoboticCrab) crab).giveOilRoboticCrabs();
+            }
+        }
+    }
+
+    public void maintenanceAllRoboticCrabs() {
+        for (Crab crab : crabsInShelter) {
+            if (crab instanceof RoboticCrab) {
+                ((RoboticCrab) crab).maintenanceRoboticCrabs();
+            }
+        }
+    }
+
+    public void feedCrabByName(String crabName) {
         Crab crab = findCrabByName(crabName);
-        if(crab instanceof HermitCrab){
-            ((HermitCrab) crab).play();
+        if (crab instanceof OrganicCrab) {
+            ((OrganicCrab) crab).feed();
         }
     }
-    public void giveWaterAll(){
-        for(Crab crab:crabsInShelter){
-            if(crab instanceof HermitCrab) {
-                ((HermitCrab) crab).giveWater();
+
+    public void chargeCrabByName(String crabName) {
+        Crab crab = findCrabByName(crabName);
+        if (crab instanceof RoboticCrab) {
+            ((RoboticCrab) crab).chargeRoboticCrabs();
+        }
+    }
+
+    public void giveOilCrabByName(String crabName) {
+        Crab crab = findCrabByName(crabName);
+        if (crab instanceof RoboticCrab) {
+            ((RoboticCrab) crab).giveOilRoboticCrabs();
+        }
+    }
+
+    public void maintenanceCrabByName(String crabName) {
+        Crab crab = findCrabByName(crabName);
+        if (crab instanceof RoboticCrab) {
+            ((RoboticCrab) crab).maintenanceRoboticCrabs();
+        }
+    }
+
+    public void giveWaterCrabByName(String crabName) {
+        Crab crab = findCrabByName(crabName);
+        if (crab instanceof OrganicCrab) {
+            ((OrganicCrab) crab).giveWater();
+        }
+    }
+
+    public void checkStatusCrabByName(String crabName) {
+        Crab crab = findCrabByName(crabName);
+        if (crab instanceof OrganicCrab) {
+            ((OrganicCrab) crab).statusMessage();
+        } else if (crab instanceof RoboticCrab) {
+            ((RoboticCrab) crab).statusMessageRoboticCrabs();
+        }
+    }
+
+    public void sprayCageCrabByName(String crabName) {
+        Crab crab = findCrabByName(crabName);
+        if (crab instanceof OrganicCrab) {
+            ((OrganicCrab) crab).giveSaltWater();
+        }
+    }
+
+    public void greetingCrabByName(String crabName) {
+        Crab crab = findCrabByName(crabName);
+        if (crab instanceof HermitCrab) {
+            ((HermitCrab) crab).greetingHermitCrab();
+        } else if (crab instanceof RoboticHermitCrab) {
+            ((RoboticHermitCrab) crab).greetingRoboticHermitCrab();
+        } else if (crab instanceof RoboticHorseshoeCrab) {
+            ((RoboticHorseshoeCrab) crab).greetingRoboticHorseshoeCrab();
+        } else if (crab instanceof HorseshoeCrab) {
+            ((HorseshoeCrab) crab).greetingHorseshoeCrab();
+        }
+    }
+
+    public void takeSwimmingCrabByName(String crabName) {
+        Crab crab = findCrabByName(crabName);
+        if (crab instanceof HorseshoeCrab) {
+            ((HorseshoeCrab) crab).takeSwimming();
+            ((HorseshoeCrab) crab).swim();
+        } else if (crab instanceof RoboticHorseshoeCrab) {
+            ((RoboticHorseshoeCrab) crab).takeSwimming();
+            ((RoboticHorseshoeCrab) crab).swim();
+        }
+    }
+    public void checkStatusAllOrganicCrabs() {
+        for (Crab crab : crabsInShelter) {
+            if (crab instanceof OrganicCrab) {
+                ((OrganicCrab) crab).statusMessage();
             }
         }
     }
-    public void checkStatusAll(){
-        for(Crab crab:crabsInShelter){
-            if(crab instanceof HermitCrab) {
-                ((HermitCrab) crab).statusMessage();
+
+    public void checkStatusAllRoboticCrabs() {
+        for (Crab crab : crabsInShelter) {
+            if (crab instanceof RoboticCrab) {
+                ((RoboticCrab) crab).statusMessageRoboticCrabs();
             }
         }
     }
-    public void sprayCageAll(){
-        for(Crab crab:crabsInShelter){
-            if(crab instanceof HermitCrab) {
-                ((HermitCrab) crab).sprayCage();
+
+    public void takeSwimmingHorseshoeCrabs() {
+        for (Crab crab : crabsInShelter) {
+            if (crab instanceof HorseshoeCrab) {
+                ((HorseshoeCrab) crab).takeSwimming();
+            } else if (crab instanceof RoboticHorseshoeCrab) {
+                ((RoboticHorseshoeCrab) crab).takeSwimming();
             }
         }
     }
-    public void playAll(){
-        for(Crab crab:crabsInShelter){
-            if(crab instanceof HermitCrab) {
-                ((HermitCrab) crab).play();
+
+    public void checkStatusAllHorseshoeCrabs() {
+        for (Crab crab : crabsInShelter) {
+            if (crab instanceof HorseshoeCrab) {
+                ((HorseshoeCrab) crab).statusMessage();
+            } else if (crab instanceof RoboticHorseshoeCrab) {
+                ((RoboticHorseshoeCrab) crab).statusMessageRoboticCrabs();
             }
         }
     }
-    public void tick(){
-        Crab.hunger--;
-        Crab.thirst--;
-        Crab.humid--;
+
+    public void tickOrganicCrabs() {
+        for (Crab crab : crabsInShelter) {
+            if (crab instanceof OrganicCrab) {
+                ((OrganicCrab) crab).tickOrganic();
+            }
+        }
+    }
+
+    public void tickRoboticCrabs() {
+        for (Crab crab : crabsInShelter) {
+            if (crab instanceof RoboticCrab) {
+                ((RoboticCrab) crab).tickRoboticCrab();
+            }
+        }
+    }
+    public void tickAllCrabs() {
+        for (Crab crab : crabsInShelter) {
+            if (crab instanceof RoboticCrab) {
+                ((RoboticCrab) crab).tickRoboticCrab();
+            }
+            else if (crab instanceof OrganicCrab) {
+                ((OrganicCrab) crab).tickOrganic();
+            }
+        }
+    }
+    public boolean allCrabsAlive(){
+        for (Crab crab : crabsInShelter) {
+            if (!crab.alive()){
+                return false;
+            }
+        }
+        return true;
     }
 
 }
